@@ -19,7 +19,7 @@ var AJSUnit = function(testSuite){
 			for(var j = 0; j < stack[i].assertions.length; j++){
 				var liItem = document.createElement('li');
 				ulItemHead.appendChild(liItem);	
-				liItem.innerHTML = 	stack[i].assertions[j].assertionName + ' - ' +  stack[i].assertions[j].message;		
+				liItem.innerHTML = 	publicMethods.htmlEscape(stack[i].assertions[j].assertionName + ' - ' +  stack[i].assertions[j].message);		
 				if(stack[i].assertions[j].error){ 
 					liItem.style.color = 'red';
 					errors++;
@@ -65,6 +65,9 @@ var AJSUnit = function(testSuite){
 	};
 	//Public methods
 	var publicMethods = {
+		htmlEscape: function(htmlText){
+			return htmlText.replace(/>/ig, '&gt;').replace(/</ig, '&lt;');
+		},
 		ok: function(cond, message){
 			if(message == null){
 				message = 'test a condition';

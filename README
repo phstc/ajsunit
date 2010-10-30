@@ -1,0 +1,34 @@
+Yes, it's an Another JavaScript Unit Test library
+==========
+
+Why?
+
+* It's very very simple, more than others JavaScript Unit Test libraries
+* No dependencies requirements. You only need to include ajsunit.js
+* DSL based - eq, ok, ne
+
+	<script src="../src/ajsunit.js" type="text/javascript"></script>
+	var testAJSUnit = {
+		tests: {
+			'test an error condition': function(){
+				//throw "ReferenceError" "asdasadasdasda is not defined"
+				asdasadasdasda
+			},
+			'test a false, true, false and error condition': function(t){
+				t.ok('a' == 'b');
+				t.ok('a' != 'b');
+				t.ok('a' == 'c');
+			},
+			'test a true condition': function(t){
+				t.ok('a' == 'a');
+			},
+			'test a false comparison': function(t){
+				t.ne('a', 'b');
+			},
+			'test a true comparison': function(t){
+				t.eq('a', 'a');
+			}
+
+		}
+	}
+	new AJSUnit(testAJSUnit).execute();

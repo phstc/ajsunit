@@ -1,11 +1,12 @@
-Yes, it's an Another JavaScript Unit Test library
-==========
+= Yes, it's an Another JavaScript Unit Test library
 
-Why?
+== Why?
 
 * It's very very simple, more than others JavaScript Unit Test libraries
-* No dependencies requirements. You only need to include ajsunit.js
+* No dependencies requirements. You only need to include the ajsunit.js
 * DSL based - eq, ok, ne
+
+Check out the following examples:
 
 	<script src="../src/ajsunit.js" type="text/javascript"></script>
 	var testAJSUnit = {

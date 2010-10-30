@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<title>Yes, you are running an Another JavaScript Unit Test library</title>
+	<script src="../src/ajsunit.js" type="text/javascript"></script>
+	<script>		
+	var testAJSUnit = {
+		tests: {
+			'test an error condition': function(){
+				//throw "ReferenceError" "asdasadasdasda is not defined"
+				asdasadasdasda
+			},
+			'test a false, true, false and error condition': function(t){
+				t.ok('a' == 'b');
+				t.ok('a' != 'b');
+				t.ok('a' == 'c');
+			},
+			'test a true condition': function(t){
+				t.ok('a' == 'a');
+			},
+			'test a false comparison': function(t){
+				t.ne('a', 'b');
+			},
+			'test a true comparison': function(t){
+				t.eq('a', 'a');
+			}
+
+		}
+	}
+	new AJSUnit(testAJSUnit).execute();
+	</script>
+</head>
+<body>
+</body>
+</html>

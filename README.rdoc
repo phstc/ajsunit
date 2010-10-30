@@ -32,4 +32,5 @@ Check out the following examples:
 
 		}
 	}
-	new AJSUnit(testAJSUnit).execute();
+	//you can also call new AJSUnit(testAJSUnit).execute 
+	new AJSUnit(testAJSUnit).executeOnLoad();

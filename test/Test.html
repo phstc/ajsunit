@@ -10,13 +10,11 @@
 				//throw "ReferenceError" "asdasadasdasda is not defined"
 				asdasadasdasda
 			},
-			'test a false, true, false and error condition': function(t){
-				t.ok('a' == 'b');
-				t.ok('a' != 'b');
-				t.ok('a' == 'c');
-			},
-			'test a true condition': function(t){
-				t.ok('a' == 'a');
+			'test a false, true, false, true conditions': function(t){
+				t.ok('a' == 'b', 'condition: a == b should be false');
+				t.ok('a' != 'b', 'condition: a != b should be true');
+				t.ok('a' == 'c', 'condition: a == c should be false');
+				t.ok('a' == 'a', 'condition: a == a should be true');
 			},
 			'test a false comparison': function(t){
 				t.ne('a', 'b');
@@ -27,7 +25,7 @@
 
 		}
 	}
-	new AJSUnit(testAJSUnit).execute();
+	new AJSUnit(testAJSUnit).executeOnLoad();
 	</script>
 </head>
 <body>

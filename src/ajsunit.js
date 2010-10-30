@@ -2,140 +2,108 @@ var AJSUnit = function(testSuite){
 	//Private methods
 	var stack = new Array();
 	var currentMethodName =  '';
-	var executeAfterOnLoad = function(){
-		for(var methodName in testSuite.tests){
-			currentMethodName = methodName;
-			try{
-				testSuite.tests[methodName](publicMethods);
-			}catch(e){
-				//errors++;
-				pushOnToStack(null);
+	var show = function(){
+		var h1Head = document.createElement('h1');
+		h1Head.innerHTML = "Yes, it's an <a href='http://github.com/phstc/ajsunit'>Another JavaScript Unit Test library</a>";
+		document.body.appendChild(h1Head);
+		var ulHead = document.createElement('ul');
+		document.body.appendChild(ulHead);
+		var failures = 0;
+		var errors = 0;
+		for(var i = 0; i < stack.length; i++){
+			var liItemHead = document.createElement('li');
+			ulHead.appendChild(liItemHead);			
+			liItemHead.innerHTML = stack[i].methodName;
+			var ulItemHead = document.createElement('ul');
+			ulHead.appendChild(ulItemHead);
+			for(var j = 0; j < stack[i].assertions.length; j++){
+				var liItem = document.createElement('li');
+				ulItemHead.appendChild(liItem);	
+				liItem.innerHTML = 	stack[i].assertions[j].assertionName + ' - ' +  stack[i].assertions[j].message;		
+				if(stack[i].assertions[j].error){ 
+					liItem.style.color = 'red';
+					errors++;
+				} else if(stack[i].assertions[j].fail){
+					liItem.style.color = 'red';
+					failures++;
+				} else {//success
+					liItem.style.color = 'green';
+				}
 			}
 		}
-		show();					
+		var h2Foot = document.createElement('h2');
+		h2Foot.innerHTML = 'Total: assertions: ' + stack.length + ', failures: ' + failures + ', errors: ' + errors;
+		document.body.appendChild(h2Foot);
 	};
-	var showCreateTableHead = function(table){
-		//Table head
-		var thead = document.createElement('thead');
-		table.appendChild(thead);
-		var tr = document.createElement('tr');
-		thead.appendChild(tr);
-		//Head columns
-		var th = document.createElement('th');
-		tr.appendChild(th);
-		th.innerHTML = 'Method name';
-		var th = document.createElement('th');
-		tr.appendChild(th);
-		th.innerHTML = 'Assertions';
-		var th = document.createElement('th');
-		tr.appendChild(th);
-		th.innerHTML = 'Failures';
-		var th = document.createElement('th');
-		tr.appendChild(th);
-		th.innerHTML = 'Errors';	
-	};
-	var showCreateTableFoot = function(table, assertions, errors, failures){
-		var tfoot = document.createElement('tfoot');
-		table.appendChild(tfoot);
-		var tr = document.createElement('tr');
-		tfoot.appendChild(tr);
-		//Foot columns
-		var td = document.createElement('td');
-		td.align = 'right';
-		td.colSpan = 2;
-		tr.appendChild(td);
-		td.innerHTML = assertions;					
-		var td = document.createElement('td');
-		td.align = 'right';
-		tr.appendChild(td);
-		td.innerHTML = failures;					
-		var td = document.createElement('td');
-		td.align = 'right';
-		tr.appendChild(td);
-		td.innerHTML = errors;					
-	};
-	var show = function(){
-		var h1 = document.createElement('h1');
-		document.body.appendChild(h1);
-		h1.innerHTML = 'Yes, you are running an Another JavaScript Unit Test library';
-
-		var table = document.createElement('table');
-		table.border = '1px';
-		table.width = '100%';
-		document.body.appendChild(table);
-		//Create the head
-		showCreateTableHead(table);
-		var tbody = document.createElement('tbody');
-		table.appendChild(tbody);
-		var assertions = 0;
-		var errors = 0;
-		var failures = 0;
-		for(var i = 0; i < stack.length; i++){
-			var tr = document.createElement('tr');
-			tbody.appendChild(tr);
-			var td = document.createElement('td');
-			tr.appendChild(td);
-			td.innerHTML = stack[i].methodName;
-			var td = document.createElement('td');
-			td.align = 'right';
-			tr.appendChild(td);
-			td.innerHTML = stack[i].assertions;
-			var td = document.createElement('td');
-			td.align = 'right';
-			tr.appendChild(td);
-			td.innerHTML = stack[i].failures;
-			var td = document.createElement('td');
-			td.align = 'right';
-			tr.appendChild(td);
-			td.innerHTML = stack[i].errors;
-			tr.style.background = (stack[i].failures > 0 || stack[i].errors > 0)? '#FFCCCC' : '#CCFFCC';
-			failures += stack[i].failures;
-			errors += stack[i].errors;
-			assertions += stack[i].assertions;
-		}
-		//Table foot
-		showCreateTableFoot(table, assertions, errors, failures);
-	};
-	var pushOnToStack = function(cond){
-		var stackItem = getStackItem();
-		stackItem.assertions++;
-		if(!cond){
-			stackItem.failures++;
-		}
-		if(cond == null){
-			stackItem.errors++;
-		}
-	};
-	var getStackItem = function(){
+	var getStackElementForCurrentMethodName = function(){
 		for(var i = 0; i < stack.length; i++){
 			if(stack[i].methodName == currentMethodName){
 				return stack[i];
 			}
 		}
-		var result = {
+		var newElement =  {
 			methodName: currentMethodName,
-			assertions: 0,
-			failures: 0,
-			errors: 0
+			assertions: new Array()
 		}
-		stack.push(result);
-		return result;
+		stack.push(newElement);
+		return newElement;
+	};
+	var pushOnToStack = function(_assertionName, cond, _message){
+		var element = getStackElementForCurrentMethodName();
+		var assertionElement = {
+			assertionName: _assertionName,
+			message: (_message) ? _message : '',
+			error: false,
+			fail: false
+		}
+		if(!cond){
+			assertionElement.fail = true;
+		} else if(cond == null){
+			assertionElement.error = true
+		}
+		element.assertions.push(assertionElement);
 	};
 	//Public methods
 	var publicMethods = {
-		ok: function(cond){
-			pushOnToStack(cond);
+		ok: function(cond, message){
+			if(message == null){
+				message = 'test a condition';
+			}			
+			pushOnToStack('ok', cond, message);
 		},		
-		eq: function(expected, actual){
-			pushOnToStack(expected == actual);
+		eq: function(expected, actual, message){
+			if(message == null){
+				message = 'expected: ' + expected + ', actual: ' + actual;
+			}
+			pushOnToStack('eq', expected == actual, message);
 		},
-		ne: function(expected, actual){
-			pushOnToStack(expected != actual);
+		ne: function(expected, actual, message){
+			if(message == null){
+				message = 'expected: ' + expected + ', actual: ' + actual;
+			}
+			pushOnToStack('ne', expected != actual, message);
 		},
 		execute: function(){
+			for(var methodName in testSuite.tests){
+				currentMethodName = methodName;
+				try{
+					testSuite.tests[methodName](publicMethods);
+				}catch(e){
+					//errors++;
+					pushOnToStack('error on the execution', null, e.message);
+				}
+			}
+			show();
+		},
+		executeOnLoad: function(){
+			var old = window.onload;
+			var thisInstance = this;
 			window.onload = function(){
-				executeAfterOnLoad();
-			};
+				if(old != null){
+					old();
+				}
+				thisInstance.execute();
+			}
 		}
 	};
 	return publicMethods;

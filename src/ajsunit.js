@@ -3,9 +3,11 @@ var AJSUnit = function(testSuite){
 	var stack = new Array();
 	var currentMethodName =  '';
 	var show = function(){
-		var h1Head = document.createElement('h1');
-		h1Head.innerHTML = "Yes, it's an <a href='http://github.com/phstc/ajsunit'>Another JavaScript Unit Test library</a>";
-		document.body.appendChild(h1Head);
+		if(document.getElementsByTagName('h1').length == 0){
+			var h1Head = document.createElement('h1');
+			h1Head.innerHTML = "Yes, it's an <a href='http://github.com/phstc/ajsunit'>Another JavaScript Unit Test library</a>";
+			document.body.appendChild(h1Head);
+		}
 		var ulHead = document.createElement('ul');
 		document.body.appendChild(ulHead);
 		var assertions = 0;

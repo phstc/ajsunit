@@ -8,6 +8,7 @@ var AJSUnit = function(testSuite){
 		document.body.appendChild(h1Head);
 		var ulHead = document.createElement('ul');
 		document.body.appendChild(ulHead);
+		var assertions = 0;
 		var failures = 0;
 		var errors = 0;
 		for(var i = 0; i < stack.length; i++){
@@ -29,10 +30,11 @@ var AJSUnit = function(testSuite){
 				} else {//success
 					liItem.style.color = 'green';
 				}
+				assertions++;
 			}
 		}
 		var h2Foot = document.createElement('h2');
-		h2Foot.innerHTML = 'Total: assertions: ' + stack.length + ', failures: ' + failures + ', errors: ' + errors;
+		h2Foot.innerHTML = 'Total: tests: ' + stack.length + ', assertions: ' + assertions + ', failures: ' + failures + ', errors: ' + errors;
 		document.body.appendChild(h2Foot);
 	};
 	var getStackElementForCurrentMethodName = function(){

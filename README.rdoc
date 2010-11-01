@@ -3,12 +3,13 @@
 == Why?
 
 * It's very very simple, more than others JavaScript Unit Test libraries
-* No dependencies requirements. You only need to include the ajsunit.js
-* DSL based - eq, ok, ne
+* No dependency requirements like others JavasScript libraries or CSS files. You only need to add ajsunit.js to execute the tests
+* It's DSL based - eq, ok, ne
 
 Check out the following examples:
 
 	<script src="../src/ajsunit.js" type="text/javascript"></script>
+	<script>
 	var testAJSUnit = {
 		tests: {
 			'test an error condition': function(){
@@ -32,5 +33,6 @@ Check out the following examples:
 
 		}
 	}
-	//you can also call new AJSUnit(testAJSUnit).execute 
+	//If you call in the window.onload scope, you must use new AJSUnit(testAJSUnit).execute(); 
 	new AJSUnit(testAJSUnit).executeOnLoad();
+	</script>

@@ -1,3 +1,8 @@
+/*
+ * The source code and documention of this project is available on https://github.com/phstc/ajsunit
+ * Developer name: Pablo Cantero
+ * Developer site: http://pablocantero.com
+*/
 var AJSUnit = function(testSuite){
 	//Private methods
 	var stack = new Array();

@@ -2,9 +2,16 @@
 
 == Why?
 
-* It's very very simple, more than others JavaScript Unit Test libraries
-* No dependency requirements like others JavasScript libraries or CSS files. You only need to add ajsunit.js to execute the tests
-* It's DSL based - eq, ok, ne
+* It's a very simple library, more than others JavaScript Unit Test libraries
+* You don't need any additional JavasScript libraries or CSS files dependencies. Just add ajsunit.js
+
+== Assertions
+
+* ok(condition, message) - should condition equal to true
+* ne(expected, actual, message) - should actual equal to expected
+* eq(expected, actual, message) - should actual not equal to expected
+
+The message parameter is optional for all assertions
 
 Check out the following examples:
 

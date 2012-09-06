@@ -1,49 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
-<head>
-	<title>Yes, you are running an Another JavaScript Unit Test library</title>
-	<script src="../src/ajsunit.js" type="text/javascript"></script>
-	<script>		
-	//TODO mock(document);
-	var testAJUnitLibrary = {
-		tests: {
-			'test a false comparison': function(t){
-				var ulActualSize = document.getElementsByTagName('ul').length;
-				var testSuite = {
-					tests: {
-						'false condition': function(t){
-							t.ok(false, 'false condition');
-						}
-					}
-				}
-				new AJSUnit(testSuite).execute();
-				//ulHead
-				//ulItemHead
-				t.eq(ulActualSize + 2, document.getElementsByTagName('ul').length);
-				var ulItemHead = document.getElementsByTagName('ul')[ulActualSize + 1];
-				t.eq(1, ulItemHead.getElementsByTagName('li').length);
-			},
-			'test a true comparison': function(t){
-				var ulActualSize = document.getElementsByTagName('ul').length;
-				var testSuite = {
-					tests: {
-						'false condition': function(t){
-							t.ok(true, 'true condition');
-						}
-					}
-				}
-				new AJSUnit(testSuite).execute();
-				//ulHead
-				//ulItemHead
-				t.eq(ulActualSize + 2, document.getElementsByTagName('ul').length);
-				var ulItemHead = document.getElementsByTagName('ul')[ulActualSize + 1];
-				t.eq(1, ulItemHead.getElementsByTagName('li').length);
-			}			
-		}
-	}
-	new AJSUnit(testAJUnitLibrary).executeOnLoad();
-	</script>
-</head>
-<body>
-</body>
+  <head>
+    <title>Yes, you are running an Another JavaScript Unit Test library</title>
+    <script src="../src/ajsunit.js" type="text/javascript"></script>
+    <script>
+      // TODO mock(document);
+      var testAJUnitLibrary = {
+        tests: {
+          "test a false comparison": function(t){
+            var ulActualSize = document.getElementsByTagName("ul").length;
+            var testSuite = {
+              tests: {
+                "false condition": function(t){
+                  t.ok(false, "false condition");
+                }
+              }
+            }
+            new AJSUnit(testSuite).execute();
+            // ulHead
+            // ulItemHead
+            t.eq(ulActualSize + 2, document.getElementsByTagName("ul").length);
+            var ulItemHead = document.getElementsByTagName("ul")[ulActualSize + 1];
+            t.eq(1, ulItemHead.getElementsByTagName("li").length);
+          },
+          "test a true comparison": function(t){
+            var ulActualSize = document.getElementsByTagName("ul").length;
+            var testSuite = {
+              tests: {
+                "false condition": function(t){
+                  t.ok(true, "true condition");
+                }
+              }
+            }
+            new AJSUnit(testSuite).execute();
+            // ulHead
+            // ulItemHead
+            t.eq(ulActualSize + 2, document.getElementsByTagName("ul").length);
+            var ulItemHead = document.getElementsByTagName("ul")[ulActualSize + 1];
+            t.eq(1, ulItemHead.getElementsByTagName("li").length);
+          }
+        }
+      }
+      new AJSUnit(testAJUnitLibrary).executeOnLoad();
+    </script>
+  </head>
+  <body></body>
 </html>
+

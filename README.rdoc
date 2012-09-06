@@ -2,44 +2,42 @@
 
 == Why?
 
-* It's a very simple library, more than others JavaScript Unit Test libraries
-* You don't need any additional JavasScript libraries or CSS files dependencies. Just add ajsunit.js
+* Simple && Small && Fast as possible.
+* No external dependecies (JavasScript, HTML or CSS files) needed.
 
 == Assertions
 
-* ok(condition, message) - should condition equal to true
-* ne(expected, actual, message) - should actual equal to expected
-* eq(expected, actual, message) - should actual not equal to expected
+* ok(condition, message)
+* ne(expected, actual, message)
+* eq(expected, actual, message)
 
-The message parameter is optional for all assertions
+The *message* parameter is optional for all assertions.
 
-Check out the following examples:
+== Example
 
-	<script src="https://github.com/phstc/ajsunit/raw/master/src/ajsunit.js" type="text/javascript"></script>
-	<script>
-	var testAJSUnit = {
-		tests: {
-			'test an error condition': function(){
-				//throw "ReferenceError" "asdasadasdasda is not defined"
-				asdasadasdasda
-			},
-			'test a false, true, false and error condition': function(t){
-				t.ok('a' == 'b');
-				t.ok('a' != 'b');
-				t.ok('a' == 'c');
-			},
-			'test a true condition': function(t){
-				t.ok('a' == 'a');
-			},
-			'test a false comparison': function(t){
-				t.ne('a', 'b');
-			},
-			'test a true comparison': function(t){
-				t.eq('a', 'a');
-			}
-
-		}
-	}
-	//If you call in the window.onload scope, you must use new AJSUnit(testAJSUnit).execute(); 
-	new AJSUnit(testAJSUnit).executeOnLoad();
-	</script>
+    <script src="https://github.com/phstc/ajsunit/raw/master/src/ajsunit.js" type="text/javascript"></script>
+    <script>
+    var testSuite = {
+      tests: {
+        "test an error condition": function(){
+          // throws "ReferenceError" "asdasadasdasda is not defined"
+          asdasadasdasda
+        },
+        "test a false, true, false and error condition": function(t){
+          t.ok("a" === "b");
+          t.ok("a" !== "b");
+          t.ok("a" === "c");
+        },
+        "test a true condition": function(t){
+          t.ok("a" === "a");
+        },
+        "test a false comparison": function(t){
+          t.ne("a", "b");
+        },
+        "test a true comparison": function(t){
+          t.eq("a", "a");
+        }
+      }
+    };
+    new AJSUnit(testSuite).executeOnLoad();
+    </script>
